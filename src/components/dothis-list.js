@@ -1,5 +1,7 @@
 import React from "react";
+
 import DoThisItem from "./dothis-list-item";
+import './dothis-list.css';
 
 const DoThisList = ({ doThises }) => {
 
@@ -8,7 +10,7 @@ const elements = doThises.map((item) => {
   const {id, ...itemProps } = item;
 
   return (
-    <li key={id}>
+    <li key={id} className="list-group-item">
       {/* Previos: */}
       {/* <DoThisItem 
         label={item.label}
@@ -22,7 +24,7 @@ const elements = doThises.map((item) => {
 });
 
   return (
-    <ul>
+    <ul className="list-group dothis-list">
       { elements }
     </ul>
   );
