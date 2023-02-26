@@ -6,9 +6,9 @@ import DoThisList from './components/dothis-list';
 
 const App = () => {
   const doThisData = [
-    {label: 'Know about React', important: false},
-    {label: 'Build applitcation', important: true},
-    {label: 'Deploy to the server', important: false}
+    {id: 1, label: 'Know about React', important: false},
+    {id: 2, label: 'Build applitcation', important: true},
+    {id: 3, label: 'Deploy to the server', important: false}
   ];
 
   return(

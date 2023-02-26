@@ -2,9 +2,13 @@ import React from "react";
 import DoThisItem from "./dothis-list-item";
 
 const DoThisList = ({ doThises }) => {
+
 const elements = doThises.map((item) => {
+
+  const {id, ...itemProps } = item;
+
   return (
-    <li>
+    <li key={id}>
       {/* Previos: */}
       {/* <DoThisItem 
         label={item.label}
@@ -12,7 +16,7 @@ const elements = doThises.map((item) => {
       /> */}
 
       {/* Spread operator for object: */}
-      <DoThisItem { ...item } />
+      <DoThisItem { ...itemProps } />
   </li>
   );
 });
