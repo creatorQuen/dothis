@@ -5,10 +5,12 @@ import ReactDOM from 'react-dom';
 //const hw = React.createElement('h1', null, 'Hello World!')
 
 const DoThisList = () => {
+
+  const items = ['Learn React 1', 'Build Application 2']
   return (
     <ul>
-      <li>Learn React</li>
-      <li>Build Application</li>
+      <li>{items[0]}</li>
+      <li>{items[1]}</li>
     </ul>
   );
 };
@@ -20,14 +22,37 @@ const AppHeader = () => {
 };
 
 const SearchPanel = () => {
+  // Atributes = properties:
+  const searchText = 'Type here to search';
+  // className=""     and    htmlFor=""
+
+  const searchStyle = {
+    fontSize: '22px'
+  };
+
+
   return (
-    <input placeholder='search' />
+    <input 
+    style={searchStyle}
+    placeholder={searchText} 
+    // disabled={true} same thing:
+    disabled
+    />
   );
 };
 
 const App = () => {
+
+  const isLoggedIn = false;
+  const loginBox =(<span>Log in please</span>);
+  //const value = '<script>alter("")</script>';
+
   return(
     <div>
+      {/* { value } */}
+      { isLoggedIn ? null : loginBox}
+      {/* <span>{(new Date().toString())}</span> */}
+      <br></br>
       <AppHeader />
       <SearchPanel />
       <DoThisList />
