@@ -1,14 +1,25 @@
 import React from "react";
 import DoThisItem from "./dothis-list-item";
 
-const DoThisList = () => {
+const DoThisList = ({ doThises }) => {
+const elements = doThises.map((item) => {
+  return (
+    <li>
+      {/* Previos: */}
+      {/* <DoThisItem 
+        label={item.label}
+        important={item.important}
+      /> */}
+
+      {/* Spread operator for object: */}
+      <DoThisItem { ...item } />
+  </li>
+  );
+});
+
   return (
     <ul>
-      <li><DoThisItem label="Learn REACT"/></li>
-      <li><DoThisItem 
-        label="Build application" 
-        important
-        /></li>
+      { elements }
     </ul>
   );
 };
