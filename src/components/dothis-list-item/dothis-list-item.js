@@ -1,6 +1,4 @@
-import React from "react";
-
-import './dothis-list-item.css';
+import React, { Component } from "react";
 
 /*
 const DoThisItem = (props) => {
@@ -8,32 +6,66 @@ const DoThisItem = (props) => {
 }
 */
 
-// Destructuirng:
-const DoThisItem = ({label, important = false}) => {
-  const listStyle = {
-    color: important ? 'steelblue' : 'black',
-    fontWeight: important ? 'bold' : 'normal'
-  };
+import './dothis-list-item.css';
 
-  return (
-    <span className="dothis-list-item">
-        <span 
-          className="dothis-list-item-label"
-          style={listStyle}>
-          { label }
-        </span>
+export default class DoThisItem extends Component {
 
-        <button type="button"
-              className="btn btn-outline-success btn-sm float-right">
-          <i className="fa fa-exclamation" />
-        </button>
+  render() {
+    const {label, important = false} = this.props;
 
-        <button type="button"
-                className="btn btn-outline-danger btn-sm float-right">
-          <i className="fa fa-trash-o" />
-        </button>
-    </span>
-  );
-};
+    const listStyle = {
+      color: important ? 'steelblue' : 'black',
+      fontWeight: important ? 'bold' : 'normal'
+    };
 
-export default DoThisItem;
+    return (
+      <span className="dothis-list-item">
+          <span 
+            className="dothis-list-item-label"
+            style={listStyle}>
+            { label }
+          </span>
+
+          <button type="button"
+                className="btn btn-outline-success btn-sm float-right">
+            <i className="fa fa-exclamation" />
+          </button>
+
+          <button type="button"
+                  className="btn btn-outline-danger btn-sm float-right">
+            <i className="fa fa-trash-o" />
+          </button>
+      </span>
+    );
+  }
+}
+
+// Previos:
+// const DoThisItem = ({label, important = false}) => {
+//   const listStyle = {
+//     color: important ? 'steelblue' : 'black',
+//     fontWeight: important ? 'bold' : 'normal'
+//   };
+
+//   return (
+//     <span className="dothis-list-item">
+//         <span 
+//           className="dothis-list-item-label"
+//           style={listStyle}>
+//           { label }
+//         </span>
+
+//         <button type="button"
+//               className="btn btn-outline-success btn-sm float-right">
+//           <i className="fa fa-exclamation" />
+//         </button>
+
+//         <button type="button"
+//                 className="btn btn-outline-danger btn-sm float-right">
+//           <i className="fa fa-trash-o" />
+//         </button>
+//     </span>
+//   );
+// };
+
+// export default DoThisItem;
