@@ -10,6 +10,20 @@ import './dothis-list-item.css';
 
 export default class DoThisItem extends Component {
 
+  constructor() {
+    super();
+    
+    this.onLabelClick = () => {
+      console.log(`Done: ${this.props.label}`);
+    }
+    //onClick={ this.onLabelClick }>
+  }
+
+  //------------------Previos
+  // onLabelClick() {
+  //   console.log(`Done: ${this.props.label}`);
+  // }
+
   render() {
     const {label, important = false} = this.props;
 
@@ -22,7 +36,11 @@ export default class DoThisItem extends Component {
       <span className="dothis-list-item">
           <span 
             className="dothis-list-item-label"
-            style={listStyle}>
+            style={listStyle}
+            //onClick={ () => console.log(`Done: ${label}`)}>
+            //onClick={ this.onLabelClick }>
+            //onClick={this.onLabelClick.bind(this) }>
+            onClick={ this.onLabelClick }>
             { label }
           </span>
 

@@ -15,7 +15,7 @@ export default class ItemStatusFilter extends Component {
               className="btn btn-outline-secondary">Done</button>
       </div>
     );
-  };
+  }
 }
 
 // ----------------------------------- Previos:
