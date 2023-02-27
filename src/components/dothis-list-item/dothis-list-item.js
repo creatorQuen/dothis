@@ -10,22 +10,38 @@ import './dothis-list-item.css';
 
 export default class DoThisItem extends Component {
 
-  constructor() {
-    super();
-    
-    this.onLabelClick = () => {
-      console.log(`Done: ${this.props.label}`);
-    }
-    //onClick={ this.onLabelClick }>
-  }
+  // constructor() {
+  //   super();
 
-  //------------------Previos
-  // onLabelClick() {
-  //   console.log(`Done: ${this.props.label}`);
+  //   this.state = {
+  //     done: false
+  //   };
+  //   this.onLabelClick = () => {
+  //     this.setState({
+  //       done: true
+  //     });
+  //   };
+  //    //onClick={ this.onLabelClick }>
   // }
+
+  state = {
+    done: false
+  };
+
+  onLabelClick = () => {
+    this.setState({
+        done: true
+    });
+  }
 
   render() {
     const {label, important = false} = this.props;
+    const { done } = this.state;
+
+    let classNames = 'dothis-list-item';
+    if(done) {
+      classNames += ' done';
+    }
 
     const listStyle = {
       color: important ? 'steelblue' : 'black',
@@ -33,7 +49,7 @@ export default class DoThisItem extends Component {
     };
 
     return (
-      <span className="dothis-list-item">
+      <span className={classNames}>
           <span 
             className="dothis-list-item-label"
             style={listStyle}
