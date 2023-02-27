@@ -1,6 +1,6 @@
 import React from "react";
 
-import DoThisItem from "./dothis-list-item";
+import DoThisItem from "../dothis-list-item";
 import './dothis-list.css';
 
 const DoThisList = ({ doThises }) => {
