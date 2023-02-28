@@ -29,18 +29,35 @@ export default class DoThisItem extends Component {
     important: false
   };
 
+  // onLabelClick = () => {
+  //   this.setState({
+  //       done: true
+  //   });
+  // }
+
+  // onMarkImportant = () => {
+  //   this.setState({
+  //     important: true
+  //   });
+  // };
+
   onLabelClick = () => {
-    this.setState({
-        done: true
+    this.setState(({done}) => {
+      return {
+        done: !done
+      }
     });
   }
 
   onMarkImportant = () => {
-    this.setState({
-      important: true
+    this.setState((state) => {
+      return {
+        important: !state.important
+      };
     });
   };
 
+  
   render() {
     const {label} = this.props;
     const { done, important } = this.state;
