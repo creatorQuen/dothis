@@ -25,7 +25,8 @@ export default class DoThisItem extends Component {
   // }
 
   state = {
-    done: false
+    done: false,
+    important: false
   };
 
   onLabelClick = () => {
@@ -34,25 +35,35 @@ export default class DoThisItem extends Component {
     });
   }
 
+  onMarkImportant = () => {
+    this.setState({
+      important: true
+    });
+  };
+
   render() {
-    const {label, important = false} = this.props;
-    const { done } = this.state;
+    const {label} = this.props;
+    const { done, important } = this.state;
 
     let classNames = 'dothis-list-item';
     if(done) {
       classNames += ' done';
     }
 
-    const listStyle = {
-      color: important ? 'steelblue' : 'black',
-      fontWeight: important ? 'bold' : 'normal'
-    };
+    // const listStyle = {
+    //   color: important ? 'steelblue' : 'black',
+    //   fontWeight: important ? 'bold' : 'normal'
+    // };
+
+    if (important) {
+      classNames += ' important';
+    }
+
 
     return (
       <span className={classNames}>
           <span 
             className="dothis-list-item-label"
-            style={listStyle}
             //onClick={ () => console.log(`Done: ${label}`)}>
             //onClick={ this.onLabelClick }>
             //onClick={this.onLabelClick.bind(this) }>
@@ -61,7 +72,8 @@ export default class DoThisItem extends Component {
           </span>
 
           <button type="button"
-                className="btn btn-outline-success btn-sm float-right">
+                className="btn btn-outline-success btn-sm float-right"
+                onClick={this.onMarkImportant}>
             <i className="fa fa-exclamation" />
           </button>
 
