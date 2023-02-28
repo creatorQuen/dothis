@@ -3,7 +3,7 @@ import React from "react";
 import DoThisItem from "../dothis-list-item";
 import './dothis-list.css';
 
-const DoThisList = ({ doThises }) => {
+const DoThisList = ({ doThises, onDeleted }) => {
 
 const elements = doThises.map((item) => {
 
@@ -18,7 +18,10 @@ const elements = doThises.map((item) => {
       /> */}
 
       {/* Spread operator for object: */}
-      <DoThisItem { ...itemProps } />
+      <DoThisItem 
+        { ...itemProps } 
+        onDeleted={()=> onDeleted(id)}
+      />
   </li>
   );
 });

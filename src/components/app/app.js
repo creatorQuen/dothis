@@ -20,7 +20,10 @@ const App = () => {
         <ItemStatusFilter />
       </div>
 
-      <DoThisList doThises={doThisData} />
+      <DoThisList 
+        doThises={doThisData} 
+        onDeleted={ (id) => console.log('Del', id)}
+        />
     </div>
   );
 };
