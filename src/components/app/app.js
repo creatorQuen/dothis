@@ -4,8 +4,11 @@ import AppHeader from '../app-header';
 import SearchPanel from '../search-panel';
 import DoThisList from '../dothis-list';
 import ItemStatusFilter from '../item-status-filter';
+import ItemAddForm from '../item-add-form';
 
 export default class App extends Component{
+
+  maxId = 100;
 
   state = {
     doThisData: [
@@ -31,6 +34,29 @@ export default class App extends Component{
     });
   }
 
+  addItem = (text) => {
+    const newItem = {
+      label: text,
+      important: false,
+      id: this.maxId++
+    };
+
+    //console.log('Added', text);
+
+    this.setState(({doThisData}) => {
+      //doThisData.push(newItem);
+
+      const newArr = [
+        ...doThisData,
+        newItem
+      ];
+
+      return {
+        doThisData: newArr
+      };
+    });
+  };
+
   render() {
     return(
       <div className="dothis-app">
@@ -45,6 +71,8 @@ export default class App extends Component{
           //onDeleted={ (id) => console.log('Del', id)}
           onDeleted={this.deleteItem}
           />
+
+          <ItemAddForm onItemAdded={this.addItem}/>
       </div>
     );
   };
