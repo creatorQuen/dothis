@@ -41,26 +41,31 @@ export default class DoThisItem extends Component {
   //   });
   // };
 
-  onLabelClick = () => {
-    this.setState(({done}) => {
-      return {
-        done: !done
-      }
-    });
-  }
 
-  onMarkImportant = () => {
-    this.setState((state) => {
-      return {
-        important: !state.important
-      };
-    });
-  };
+  //----------------------------------------
+  // onLabelClick = () => {
+  //   this.setState(({done}) => {
+  //     return {
+  //       done: !done
+  //     }
+  //   });
+  // }
+
+  // onMarkImportant = () => {
+  //   this.setState((state) => {
+  //     return {
+  //       important: !state.important
+  //     };
+  //   });
+  // };
 
   
   render() {
-    const { label, onDeleted } = this.props;
-    const { done, important } = this.state;
+    const { label, onDeleted, 
+      onToggleImportant, onToggleDone,
+      done, important} = this.props;
+      
+    //const { done, important } = this.state;
 
     let classNames = 'dothis-list-item';
     if(done) {
@@ -84,19 +89,24 @@ export default class DoThisItem extends Component {
             //onClick={ () => console.log(`Done: ${label}`)}>
             //onClick={ this.onLabelClick }>
             //onClick={this.onLabelClick.bind(this) }>
-            onClick={ this.onLabelClick }>
+
+            // onClick={ this.onLabelClick }>
+            onClick={ onToggleDone }>
             { label }
           </span>
 
           <button type="button"
                 className="btn btn-outline-success btn-sm float-right"
-                onClick={this.onMarkImportant}>
+
+                // onClick={this.onMarkImportant}>
+                onClick={onToggleImportant}>
             <i className="fa fa-exclamation" />
           </button>
 
           <button type="button"
                   className="btn btn-outline-danger btn-sm float-right"
                   //onClick={this.props.onDeleted}>
+
                   onClick={onDeleted}>
             <i className="fa fa-trash-o" />
           </button>
