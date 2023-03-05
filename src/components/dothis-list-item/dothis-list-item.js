@@ -24,10 +24,12 @@ export default class DoThisItem extends Component {
   //    //onClick={ this.onLabelClick }>
   // }
 
-  state = {
-    done: false,
-    important: false
-  };
+  //-------------------------
+  // state = {
+  //   done: false,
+  //   important: false
+  // };
+  //--------------------------
 
   // onLabelClick = () => {
   //   this.setState({

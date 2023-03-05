@@ -12,10 +12,19 @@ export default class App extends Component{
 
   state = {
     doThisData: [
-      {id: 1, label: 'Know about React', important: false},
-      {id: 2, label: 'Build applitcation', important: true},
-      {id: 3, label: 'Deploy to the server', important: false}
+      this.createDoThisItem('Know about React'),
+      this.createDoThisItem('Build applitcation'),
+      this.createDoThisItem('Deploy to the server')
     ]
+  };
+
+  createDoThisItem(label) {
+    return {
+      label,
+      important: false,
+      done: false,
+      id: this.maxId++
+    }
   };
 
   deleteItem = (id) => {
@@ -32,14 +41,10 @@ export default class App extends Component{
         doThisData: newArray
       };
     });
-  }
+  };
 
   addItem = (text) => {
-    const newItem = {
-      label: text,
-      important: false,
-      id: this.maxId++
-    };
+    const newItem = this.createDoThisItem(text);
 
     //console.log('Added', text);
 
@@ -57,25 +62,58 @@ export default class App extends Component{
     });
   };
 
+
+  toggleProperty(arr, id, propName) {
+    // 1 update
+    const idx = arr.findIndex((el) => el.id === id);
+    const oldItem = arr[idx];
+    const newItem = {...oldItem, 
+      [propName]: !oldItem[propName]};
+    
+    // 2 new array
+    return [
+      ...arr.slice(0, idx),
+      newItem,
+      ...arr.slice(idx + 1)
+    ];
+  };
+
   onToggleImportant = (id) => {
-    console.log('ToggleImportant', id);
+    this.setState(({doThisData}) => {
+      return {
+        doThisData: this.toggleProperty(doThisData, id, 'important')
+      };
+    });
+    //console.log('ToggleImportant', id);
   };
 
   onToggleDone = (id) => {
-    console.log('ToggleDone', id);
+    this.setState(({doThisData}) => {
+      return {
+        doThisData: this.toggleProperty(doThisData, id, 'done')
+      };
+    });
+    //console.log('ToggleDone', id);
   };
 
   render() {
+
+    const { doThisData } = this.state
+    const doneCount = doThisData
+                      .filter((el) => el.done).length;
+
+    const doThisCount = doThisData.length - doneCount;
+
     return(
       <div className="dothis-app">
-        <AppHeader doThis={1} done={3}/>
+        <AppHeader doThis={doThisCount} done={doneCount}/>
         <div className="top-panel d-flex">
           <SearchPanel />
           <ItemStatusFilter />
         </div>
   
         <DoThisList 
-          doThises={this.state.doThisData} 
+          doThises={doThisData} 
           //onDeleted={ (id) => console.log('Del', id)}
           onDeleted={this.deleteItem}
           onToggleImportant={this.onToggleImportant}
