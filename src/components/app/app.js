@@ -15,7 +15,8 @@ export default class App extends Component{
       this.createDoThisItem('Know about React'),
       this.createDoThisItem('Build applitcation'),
       this.createDoThisItem('Deploy to the server')
-    ]
+    ],
+    term: ''
   };
 
   createDoThisItem(label) {
@@ -96,24 +97,47 @@ export default class App extends Component{
     //console.log('ToggleDone', id);
   };
 
+  onSearchChange = (term) => {
+    this.setState({ term });
+  };
+
+  search(items, term) {
+    if (term.length === 0) {
+      return items;
+    }
+
+    return items.filter((item) => {
+      // return item.label
+      //   .toLowCase()
+      //   .indexOf(term.toLowCase()) > -1;
+
+      return item
+        .label
+        .toLowerCase().indexOf(term.toLowerCase()) > -1;
+    });
+  };
+
   render() {
 
-    const { doThisData } = this.state
+    const { doThisData, term } = this.state
     const doneCount = doThisData
                       .filter((el) => el.done).length;
 
+    const visibleItems = this.search(doThisData, term);
     const doThisCount = doThisData.length - doneCount;
 
     return(
       <div className="dothis-app">
         <AppHeader doThis={doThisCount} done={doneCount}/>
         <div className="top-panel d-flex">
-          <SearchPanel />
+          <SearchPanel 
+            onSearchChange={this.onSearchChange}
+          />
           <ItemStatusFilter />
         </div>
   
         <DoThisList 
-          doThises={doThisData} 
+          doThises={visibleItems} 
           //onDeleted={ (id) => console.log('Del', id)}
           onDeleted={this.deleteItem}
           onToggleImportant={this.onToggleImportant}
