@@ -16,7 +16,8 @@ export default class App extends Component{
       this.createDoThisItem('Build applitcation'),
       this.createDoThisItem('Deploy to the server')
     ],
-    term: ''
+    term: '',
+    filter: 'all'
   };
 
   createDoThisItem(label) {
@@ -101,6 +102,23 @@ export default class App extends Component{
     this.setState({ term });
   };
 
+  filter(items, filter) {
+    switch(filter) {
+      case 'all':
+        return items;
+      case 'active':
+        return items.filter((item) => !item.done);
+      case 'done':
+        return items.filter((item) => item.done);
+      default:
+        return items;
+    }
+  };
+
+  onFilterChange = (filter) => {
+    this.setState({ filter });
+  };
+
   search(items, term) {
     if (term.length === 0) {
       return items;
@@ -119,11 +137,14 @@ export default class App extends Component{
 
   render() {
 
-    const { doThisData, term } = this.state
+    const { doThisData, term, filter } = this.state
     const doneCount = doThisData
                       .filter((el) => el.done).length;
 
-    const visibleItems = this.search(doThisData, term);
+    const visibleItems = this.filter(
+      this.search(doThisData, term), filter);
+
+
     const doThisCount = doThisData.length - doneCount;
 
     return(
@@ -133,7 +154,10 @@ export default class App extends Component{
           <SearchPanel 
             onSearchChange={this.onSearchChange}
           />
-          <ItemStatusFilter />
+          <ItemStatusFilter 
+            filter={filter} 
+            onFilterChange={this.onFilterChange}
+          />
         </div>
   
         <DoThisList 
